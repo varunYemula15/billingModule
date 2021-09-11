@@ -1,0 +1,15 @@
+<div class="example-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Enter Id</mat-label>
+    <input matInput placeholder="123" [formControl]="id" required>
+    <mat-error *ngIf="id.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+</div>
+<div class="footer">
+  <button mat-button color="primary" (click)="onOk()">
+    <span>Ok</span>
+  </button>
+  <button mat-button color="warn" mat-dialog-close (click)="dialog.closeAll()">
+    <span> Cancel</span>
+  </button>
+</div>

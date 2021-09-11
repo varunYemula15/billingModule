@@ -1,0 +1,18 @@
+<div class="home">
+<mat-card class="bill-card" (click)="openDialog()">
+  <mat-icon> insert_drive_file</mat-icon>
+  <span class="button-text">  New Bill</span>
+</mat-card>
+<mat-card class="bill-card" (click)="navigateTo('viewAllBills')">
+  <mat-icon>file_copy</mat-icon>
+  <span class="button-text"> View All Bills</span>
+</mat-card>
+<mat-card class="bill-card" (click)="openFromAndToDate()">
+  <mat-icon>date_range</mat-icon>
+  <span class="button-text"> View Bills By Date</span>
+</mat-card>
+<mat-card class="bill-card" (click)="byId()">
+  <mat-icon>search</mat-icon>
+  <span class="button-text"> View Bill By ID</span>
+</mat-card>
+</div>

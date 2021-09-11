@@ -1,0 +1,31 @@
+<mat-toolbar>
+  <span>Create new bill</span>
+</mat-toolbar>
+
+
+<form [formGroup]="newBillForm" (ngSubmit)="onOk()">
+  <div class="new-bill-date">Date : {{today}}</div>
+  <div class="new-bill-date">Bill id : 1</div>
+  <div class="new-bill-date">Order</div>
+  <div class="new-bill-date">
+    <ul>
+      <li>Coffee</li>
+      <li>Tea</li>
+      <li>Milk</li>
+    </ul>
+  </div>
+  <div class="new-bill-date">Total items : 3</div>
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Total cost">
+    </mat-form-field>
+  </div>
+  <div class="footer">
+    <button mat-button color="primary">
+      <span>Add</span>
+    </button>
+    <button mat-button color="warn" mat-dialog-close (click)="dialog.closeAll()">
+      <span> Cancel</span>
+    </button>
+  </div>
+</form>
