@@ -31,6 +31,7 @@ export class FromAndToDateComponent implements OnInit {
     this.dialog.closeAll();
   }
   getFormattedDate(date: any) {
-    return new Date(date).getFullYear() + '-' + new Date(date).getMonth() + '-' + new Date(date).getDate();
+    let month = new Date(date).getMonth() + 1;
+    return new Date(date).getFullYear() + '-' + month + '-' + new Date(date).getDate();
   }
 }
