@@ -13,21 +13,24 @@ export class FromAndToDateComponent implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any,
-  private dialogRef: MatDialogRef<FromAndToDateComponent>,
-  public dialog: MatDialog,
-  private router: Router) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<FromAndToDateComponent>,
+    public dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit(): void {
 
   }
-  onOk(){
+  onOk() {
     const controls = this.range.controls;
     // const sDate = controls.start.value;
     // const eDate = controls.end.value;
-    const sDate = "2021-09-01";
-    const eDate = "2021-09-12";
-    this.router.navigateByUrl(`/viewAllBills?sDate=`+sDate+"&eDate="+eDate);
+    const sDate = this.getFormattedDate(controls.start.value); //"2021-09-01";
+    const eDate = this.getFormattedDate(controls.end.value);
+    this.router.navigateByUrl(`/viewAllBills?sDate=` + sDate + "&eDate=" + eDate);
     this.dialog.closeAll();
+  }
+  getFormattedDate(date: any) {
+    return new Date(date).getFullYear() + '-' + new Date(date).getMonth() + '-' + new Date(date).getDate();
   }
 }
