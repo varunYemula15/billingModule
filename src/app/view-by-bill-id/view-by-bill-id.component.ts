@@ -10,6 +10,7 @@ export class ViewByBillIdComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

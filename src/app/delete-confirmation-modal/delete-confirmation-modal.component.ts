@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { BillingService } from '../service/billing.service';
 
 @Component({
   selector: 'app-delete-confirmation-modal',
@@ -10,12 +11,19 @@ export class DeleteConfirmationModalComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<DeleteConfirmationModalComponent>,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private billingService: BillingService) { }
 
   ngOnInit(): void {
   }
   delete() {
     console.log(this.data.billId);
+    this.billingService.deleteBill(this.data.billId).subscribe((obj: any)=>{
+      if (obj === "SUCCESS") {
+        // redirect to home page
+        this.clear();
+      }
+    });
   }
 
   clear() {

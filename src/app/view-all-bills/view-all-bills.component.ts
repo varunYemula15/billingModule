@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BillingService } from '../service/billing.service';
 
 import { Bill } from "../model/bill";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 import { EditBillComponent } from '../edit-bill/edit-bill.component';
@@ -36,14 +36,35 @@ const ELEMENT_DATA1: PeriodicElement[] = [
 export class ViewAllBillsComponent implements OnInit {
 
   ELEMENT_DATA1: Bill[];
+  billId: number;
+  sDate: string;
+  eDate: string;
   displayedColumns: string[] = ['billId', 'billDate', 'totalCost', 'totalItem', 'billOrderFK', 'actions'];
   // dataSource = ELEMENT_DATA1;
 
-  constructor(private billingService: BillingService, private router: Router, public dialog: MatDialog) { }
+  constructor(private billingService: BillingService, private router: Router, public dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.billingService.viewBills().subscribe((obj: any) => {
-      this.ELEMENT_DATA1 = obj;
+    this.route.queryParams
+      .subscribe(params => {
+        console.log(params); // { orderby: "price" }
+        this.billId = params.id;
+        this.sDate = params.sDate;
+        this.eDate = params.eDate;
+        console.log(this.billId); // price
+      }
+    );
+    this.retrieveBills();
+  }
+
+  retrieveBills(): void {
+    this.billingService.viewBills(this.billId, this.sDate, this.eDate).subscribe((obj: any) => {
+      if (obj.constructor == Array) {
+        this.ELEMENT_DATA1 = obj;
+      } else {
+        this.ELEMENT_DATA1 = [obj];
+      }
+      
     });
   }
 
@@ -58,6 +79,7 @@ export class ViewAllBillsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.retrieveBills(); // reload bills after edit
     });
   }
   deleteBill(row: any): void {
@@ -68,6 +90,7 @@ export class ViewAllBillsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.retrieveBills(); // reload bills after delete
     });
   }
 }

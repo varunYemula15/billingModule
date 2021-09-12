@@ -25,7 +25,7 @@ export class ByIdComponent implements OnInit {
   ngOnInit(): void {
   }
   onOk() {
-    this.router.navigateByUrl(`/viewAllBills`);
+    this.router.navigateByUrl(`/viewAllBills?id=`+this.id.value);
     this.dialog.closeAll()
   }
 }

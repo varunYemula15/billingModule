@@ -4,6 +4,6 @@ export class NewBill {
     billDate: string;
     totalItem: number;
     totalCost: number;
-    order: Order;
+    order: Order | number;
     billId: number;
 }
