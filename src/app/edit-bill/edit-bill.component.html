@@ -1,0 +1,33 @@
+<mat-toolbar>
+  <span>Edit bill</span>
+</mat-toolbar>
+
+<form [formGroup]="editBillForm" (ngSubmit)="updateBill()">
+  <mat-form-field class="edit-element">
+    <input matInput placeholder="Bill Date" formControlName="billDate">
+  </mat-form-field>
+
+  <mat-form-field class="edit-element">
+    <input matInput placeholder="Bill Id" formControlName="billId">
+  </mat-form-field>
+
+  <mat-form-field class="edit-element">
+    <input matInput placeholder="Bill Order FK" formControlName="billOrderFK">
+  </mat-form-field>
+  <mat-form-field class="edit-element">
+    <input matInput placeholder="Total Cost" formControlName="totalCost">
+  </mat-form-field>
+  <mat-form-field class="edit-element">
+    <input matInput placeholder="Total Item" formControlName="totalItem">
+  </mat-form-field>
+</form>
+
+
+<div class="footer">
+  <button class="new-button" mat-raised-button color="primary" (click)="updateBill()">
+    <span>Update</span>
+  </button>
+  <button class="new-button" mat-raised-button color="warn" (click)="this.dialog.closeAll()">
+    <span> Cancel</span>
+  </button>
+</div>

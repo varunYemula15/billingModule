@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { BillingService } from '../service/billing.service';
 
 import { Bill } from "../model/bill";
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
+import { EditBillComponent } from '../edit-bill/edit-bill.component';
 
 export interface PeriodicElement {
   billDate: string;
@@ -10,7 +14,7 @@ export interface PeriodicElement {
   totalItem: number;
   billOrderFK: number;
 }
-const ELEMENT_DATA: PeriodicElement[] = [
+const ELEMENT_DATA1: PeriodicElement[] = [
   { billId: 1, billDate: '22-AUG-21', totalCost: 1.0079, totalItem: 1, billOrderFK: 4 },
   { billId: 2, billDate: '22-AUG-21', totalCost: 4.0026, totalItem: 3, billOrderFK: 4 },
   { billId: 3, billDate: '22-AUG-21', totalCost: 6.941, totalItem: 3, billOrderFK: 4 },
@@ -32,10 +36,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ViewAllBillsComponent implements OnInit {
 
   ELEMENT_DATA1: Bill[];
-  displayedColumns: string[] = ['billId', 'billDate', 'totalCost', 'totalItem', 'billOrderFK'];
-  //dataSource = ELEMENT_DATA1;
+  displayedColumns: string[] = ['billId', 'billDate', 'totalCost', 'totalItem', 'billOrderFK', 'actions'];
+  // dataSource = ELEMENT_DATA1;
 
-  constructor(private billingService: BillingService) { }
+  constructor(private billingService: BillingService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.billingService.viewBills().subscribe((obj: any) => {
@@ -43,4 +47,27 @@ export class ViewAllBillsComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.router.navigateByUrl(`/home`);
+  }
+  editBill(row: any) {
+    const dialogRef = this.dialog.open(EditBillComponent, {
+      width: '650px',
+      data: row
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+  deleteBill(row: any): void {
+    const dialogRef = this.dialog.open(DeleteConfirmationModalComponent, {
+      width: '650px',
+      data: row
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

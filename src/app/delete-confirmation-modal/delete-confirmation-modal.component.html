@@ -1,0 +1,14 @@
+<mat-toolbar>
+  <span>Delete confirmation</span>
+</mat-toolbar>
+<div class="delete-body">
+  <span> Are you sure you want to delete this record ? </span>
+</div>
+<div class="footer">
+  <button class="new-button" mat-raised-button color="primary" (click)="delete()">
+    <span>Yes</span>
+  </button>
+  <button class="new-button" mat-raised-button color="warn" (click)="clear()">
+    <span> No</span>
+  </button>
+</div>

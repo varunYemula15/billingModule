@@ -1,9 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+// import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { NewBill } from '../model/new-bill';
 import { Order } from '../model/order';
 import { BillingService } from '../service/billing.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { BillSuccessModuleComponent} from '../bill-success-module/bill-success-module.component';
+
 
 @Component({
   selector: 'app-new-bill',
@@ -17,10 +21,11 @@ export class NewBillComponent implements OnInit {
   newBill: NewBill;
   order: Order;
   constructor(private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<NewBillComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: any,
+    // private dialogRef: MatDialogRef<NewBillComponent>,
     public dialog: MatDialog,
-    private billingService: BillingService) { }
+    private billingService: BillingService,
+  private router: Router) { }
 
   ngOnInit(): void {
     this.newBillForm = this.fb.group({
@@ -63,6 +68,7 @@ export class NewBillComponent implements OnInit {
 
     addBill() {
       console.log('adding new bill');
+      this.openDialog();
     }
 
     formatCurrentDate(): string {
@@ -70,14 +76,29 @@ export class NewBillComponent implements OnInit {
           month = '' + (d.getMonth() + 1),
           day = '' + d.getDate(),
           year = d.getFullYear();
-  
-      if (month.length < 2) 
+
+      if (month.length < 2)
           month = '0' + month;
-      if (day.length < 2) 
+      if (day.length < 2)
           day = '0' + day;
-  
+
       return [year, month, day].join('-');
   }
-  
+  clear(){
+    this.newBillForm.reset();
+  }
+  goBack(){
+    this.router.navigateByUrl(`/home`);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(BillSuccessModuleComponent, {
+      width: '650px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
 }

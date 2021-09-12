@@ -27,6 +27,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ByIdComponent } from './by-id/by-id.component';
 import { BillingService } from './service/billing.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BillSuccessModuleComponent } from './bill-success-module/bill-success-module.component';
+import { DeleteConfirmationModalComponent } from './delete-confirmation-modal/delete-confirmation-modal.component';
+import { EditBillComponent } from './edit-bill/edit-bill.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { HttpClientModule } from '@angular/common/http';
     ViewAllBillsByDateComponent,
     ViewByBillIdComponent,
     FromAndToDateComponent,
-    ByIdComponent
+    ByIdComponent,
+    BillSuccessModuleComponent,
+    DeleteConfirmationModalComponent,
+    EditBillComponent
   ],
   imports: [
     BrowserModule,

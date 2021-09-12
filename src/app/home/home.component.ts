@@ -21,15 +21,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(NewBillComponent, {
-      width: '650px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
 
   openFromAndToDate(): void {
     const dialogRef = this.dialog.open(FromAndToDateComponent, {

@@ -1,0 +1,15 @@
+.footer {
+  float: right;
+}
+
+.new-button{
+  margin: 0px 5px;
+}
+.delete-body{
+  height: 40px;
+  font-weight: 500;
+  font-size: 17px;
+  color: red;
+  margin: 18px;
+
+}

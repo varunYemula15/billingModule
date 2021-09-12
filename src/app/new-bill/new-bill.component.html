@@ -2,16 +2,19 @@
   <span>Create new bill</span>
 </mat-toolbar>
 
+<div class="back">
+    <button mat-raised-button color="primary"  (click)="goBack()"><mat-icon>keyboard_backspace</mat-icon>Back</button>
+</div>
 
-<form [formGroup]="newBillForm" (ngSubmit)="onOk()">
+<form class="form" [formGroup]="newBillForm" (ngSubmit)="onOk()">
   <div class="new-bill-date">Date : {{today}}</div>
   <!-- <div class="new-bill-date">Bill id : 1</div> -->
   <div class="new-bill-date">Order</div>
   <div class="new-bill-date">
     <ul>
-      <li>Coffee</li>
-      <li>Tea</li>
-      <li>Milk</li>
+      <li>US POLO T-shirt(Mens)</li>
+      <li>Denims Trouser</li>
+      <li>Adidas cap (Mens)</li>
     </ul>
   </div>
   <div class="new-bill-date">Total items : 3</div>
@@ -21,10 +24,10 @@
     </mat-form-field>
   </div>
   <div class="footer">
-    <button mat-button color="primary" onclick="addBill()">
+    <button class="new-button" mat-raised-button color="primary" (click)="addBill()">
       <span>Add</span>
     </button>
-    <button mat-button color="warn" mat-dialog-close (click)="dialog.closeAll()">
+    <button class="new-button" mat-raised-button color="warn" (click)="clear()">
       <span> Cancel</span>
     </button>
   </div>
