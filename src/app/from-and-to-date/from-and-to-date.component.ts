@@ -28,6 +28,6 @@ export class FromAndToDateComponent implements OnInit {
     const sDate = "2021-09-01";
     const eDate = "2021-09-12";
     this.router.navigateByUrl(`/viewAllBills?sDate=`+sDate+"&eDate="+eDate);
-    this.dialog.closeAll()
+    this.dialog.closeAll();
   }
 }
