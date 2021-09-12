@@ -1,6 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { NewBill } from '../model/new-bill';
+import { Order } from '../model/order';
+import { BillingService } from '../service/billing.service';
 
 @Component({
   selector: 'app-new-bill',
@@ -9,15 +12,19 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dial
 })
 export class NewBillComponent implements OnInit {
   newBillForm!: FormGroup;
-  today = new Date(Date.now()).toLocaleString().split(',')[0];
+  //today = new Date(Date.now()).toLocaleString().split(',')[0];
+  today = this.formatCurrentDate();
+  newBill: NewBill;
+  order: Order;
   constructor(private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<NewBillComponent>,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private billingService: BillingService) { }
 
   ngOnInit(): void {
     this.newBillForm = this.fb.group({
-      billId: ['', Validators.required],
+      // billId: ['', Validators.required],
       Order: ['food', Validators.required],
       totalItems: [1, Validators.required],
       totalCost: [0, Validators.required],
@@ -39,7 +46,38 @@ export class NewBillComponent implements OnInit {
     }
 
     submitNewBill(){
+      this.newBill = new NewBill();
+      this.order = new Order();
+      this.order.orderDate = this.today;
+      this.order.orderStatus = "Pending";
+      const controls = this.newBillForm.controls;
+      this.newBill.totalCost = controls.totalCost.value;
+      this.newBill.billDate = this.today;
+      this.newBill.totalItem = 3;
+      this.newBill.order = this.order;
 
+      this.billingService.newBill(this.newBill).subscribe((obj: any) => {
+          console.log('New bill created successfully!' + obj);
+      });
     }
+
+    addBill() {
+      console.log('adding new bill');
+    }
+
+    formatCurrentDate(): string {
+      var d = new Date(Date.now()),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+  
+      if (month.length < 2) 
+          month = '0' + month;
+      if (day.length < 2) 
+          day = '0' + day;
+  
+      return [year, month, day].join('-');
+  }
+  
 
 }

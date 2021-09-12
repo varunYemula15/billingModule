@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BillingService } from '../service/billing.service';
+
+import { Bill } from "../model/bill";
 
 export interface PeriodicElement {
   billDate: string;
@@ -28,14 +31,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class ViewAllBillsComponent implements OnInit {
 
-
+  ELEMENT_DATA1: Bill[];
   displayedColumns: string[] = ['billId', 'billDate', 'totalCost', 'totalItem', 'billOrderFK'];
-  dataSource = ELEMENT_DATA;
+  //dataSource = ELEMENT_DATA1;
 
-  constructor() { }
+  constructor(private billingService: BillingService) { }
 
   ngOnInit(): void {
-
+    this.billingService.viewBills().subscribe((obj: any) => {
+      this.ELEMENT_DATA1 = obj;
+    });
   }
 
 }

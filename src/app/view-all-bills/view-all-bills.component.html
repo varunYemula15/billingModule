@@ -1,11 +1,11 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="ELEMENT_DATA1" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
   <!-- billId Column -->
   <ng-container matColumnDef="billId">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <th mat-header-cell *matHeaderCellDef> Bill Id </th>
     <td mat-cell *matCellDef="let element"> {{element.billId}} </td>
   </ng-container>
 

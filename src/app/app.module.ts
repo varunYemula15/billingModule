@@ -25,6 +25,8 @@ import { FromAndToDateComponent } from './from-and-to-date/from-and-to-date.comp
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ByIdComponent } from './by-id/by-id.component';
+import { BillingService } from './service/billing.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,9 +54,10 @@ import { ByIdComponent } from './by-id/by-id.component';
     MatListModule,
     MatTableModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    HttpClientModule
   ],
-  providers: [MatDatepickerModule, MatNativeDateModule],
+  providers: [MatDatepickerModule, MatNativeDateModule, BillingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

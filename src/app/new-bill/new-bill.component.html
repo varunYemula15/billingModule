@@ -5,7 +5,7 @@
 
 <form [formGroup]="newBillForm" (ngSubmit)="onOk()">
   <div class="new-bill-date">Date : {{today}}</div>
-  <div class="new-bill-date">Bill id : 1</div>
+  <!-- <div class="new-bill-date">Bill id : 1</div> -->
   <div class="new-bill-date">Order</div>
   <div class="new-bill-date">
     <ul>
@@ -17,11 +17,11 @@
   <div class="new-bill-date">Total items : 3</div>
   <div>
     <mat-form-field>
-      <input matInput placeholder="Total cost">
+      <input matInput placeholder="Total cost" formControlName="totalCost">
     </mat-form-field>
   </div>
   <div class="footer">
-    <button mat-button color="primary">
+    <button mat-button color="primary" onclick="addBill()">
       <span>Add</span>
     </button>
     <button mat-button color="warn" mat-dialog-close (click)="dialog.closeAll()">
